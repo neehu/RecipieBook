@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-success">
+            New Recipie
+        </button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        <app-recipies-item *ngFor="let recipe of recipies" 
+                          [recipeItem]="recipe"
+                          (onRecipieItemClick)="displayRecipieDetails(recipe)"></app-recipies-item>
+    </div>
+</div>
