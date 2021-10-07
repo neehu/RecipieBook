@@ -1,13 +1,9 @@
-<app-header
-(featureClicked)="navigateTo($event)"
->
-</app-header>
+<app-header></app-header>
 <div class="container">
         <div class="row">
             <h2>{{title}}</h2>
             <div class="col-md-12">
-                <app-recipies *ngIf="feature==='recipe'"></app-recipies>
-                <app-shopping-list *ngIf="feature!='recipe'"></app-shopping-list>
+           <router-outlet></router-outlet>
             </div>
         </div>
 </div>

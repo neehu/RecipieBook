@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, DoCheck } from "@angular/core";
 import { Recipie } from "./recipie.model";
+import { RecipieService } from "./recipie.service";
 
 @Component({
     selector:'app-recipies',
@@ -8,10 +9,12 @@ import { Recipie } from "./recipie.model";
 })
 
 export class Recipies {
-selectedRecipe:Recipie;
 
-    assignRecipieDetails(selectedRecipe:Recipie)
-    {
-        this.selectedRecipe = selectedRecipe;
+    selectedRecipe:Recipie;
+    constructor(private service:RecipieService){
     }
+
+    ngOnInit(): void {
+
+      }
 }

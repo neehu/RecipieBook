@@ -1,5 +1,7 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipie } from '../recipie.model';
+import { RecipieService } from '../recipie.service';
 
 @Component({
   selector: 'app-recipies-list',
@@ -7,22 +9,19 @@ import { Recipie } from '../recipie.model';
   styleUrls: ['./recipies-list.component.css']
 })
 export class RecipiesListComponent implements OnInit {
-  recipies: Recipie[] = [
-    new Recipie("Test Recipie","THis is for testing",
-              "https://www.blueosa.com/wp-content/uploads/2020/01/the-best-top-10-indian-dishes.jpg"),
-              new Recipie("Another Test Recipie","THis is for testing",
-              "https://www.blueosa.com/wp-content/uploads/2020/01/the-best-top-10-indian-dishes.jpg")
-]
-@Output() selectedRecipie = new EventEmitter<Recipie>();
-
-  constructor() { }
+recipies:Recipie[]=[];
+  constructor(private service:RecipieService,
+              private router:Router,
+              private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.recipies = this.service.getRecipies();
+    this.service.recipieChange.subscribe(data => {
+      this.recipies = data;
+    })
   }
 
-  displayRecipieDetails(recipieClicked:Recipie)
-  {
-    this.selectedRecipie.emit(recipieClicked);
+  naviageteTo(i){
+    this.router.navigate(['recipie-detail',i],{relativeTo:this.activatedRoute})
   }
-
 }

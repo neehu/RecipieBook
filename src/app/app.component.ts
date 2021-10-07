@@ -8,9 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'RecipieBook';
   feature:string = 'recipe';
-
-  navigateTo(event)
-  {
-    this.feature = event;  
-  }
 }

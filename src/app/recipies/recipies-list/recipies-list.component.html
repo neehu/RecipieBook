@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-xs-12">
-        <button class="btn btn-success">
+        <button class="btn btn-success"
+        routerLink = "new"
+        routerLinkActive="active">
             New Recipie
         </button>
     </div>
@@ -8,8 +10,9 @@
 <hr>
 <div class="row">
     <div class="col-xs-12">
-        <app-recipies-item *ngFor="let recipe of recipies" 
+        <app-recipies-item *ngFor="let recipe of recipies; let i=index" 
                           [recipeItem]="recipe"
-                          (onRecipieItemClick)="displayRecipieDetails(recipe)"></app-recipies-item>
+                         [id] = "i"
+                         ></app-recipies-item>
     </div>
 </div>

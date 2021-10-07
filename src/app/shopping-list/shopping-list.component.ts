@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, Data } from '@angular/router';
 import { Ingridient } from '../Shared/Ingridient.model';
+import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
@@ -8,18 +10,19 @@ import { Ingridient } from '../Shared/Ingridient.model';
 })
 export class ShoppingListComponent implements OnInit {
 
-
-  ingridients: Ingridient[] = [
-    new Ingridient("Apple",10),
-    new Ingridient("Tomato",20)
-  ]
-  constructor() { }
+ingridients:Ingridient[] = [];
+selectedIndex:number;
+  constructor(private activatedRoute:ActivatedRoute,private service:ShoppingListService) { }
 
   ngOnInit(): void {
-  }
+    this.ingridients = this.activatedRoute.snapshot.data["ingridients"];
+    this.service.onIngridientsChanged.subscribe((data)=> {
+      this.ingridients = data;
+    })
 
-  addingridients(ingridient:Ingridient) {
-    this.ingridients.push(ingridient);
   }
-
+  
+  onEditItem(i:number){
+      this.service.onEditingridient(i);
+  }
 }
